@@ -2,6 +2,10 @@
 
 <hr>
 
+- Plugin: https://www.roblox.com/library/7850002844/CMD
+- Devforum: -
+<hr>
+
 Use this extremely versatile plugin to improve your workflow on Roblox Studio by quickly executing custom shortcuts.
 
 #### How to plugin works:
