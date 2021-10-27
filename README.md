@@ -3,7 +3,7 @@
 <hr>
 
 - Plugin: https://www.roblox.com/library/7850002844/CMD
-- Devforum: -
+- Devforum: https://devforum.roblox.com/t/cmd-execute-custom-commands/1527542
 <hr>
 
 Use this extremely versatile plugin to improve your workflow on Roblox Studio by quickly executing custom shortcuts.
