@@ -49,8 +49,7 @@ return {
 ![image](https://user-images.githubusercontent.com/58129405/139063916-e4244dd7-ed35-4cd4-902a-1db74e778496.png)
 
 ### API:
-
-Before starting, please note that you must remember to close the Chain by using `chain:Dispose()` at the end of your custom command. Depending on your shortcut you should also close the Chain if the input of any nodes is nil.
+Before starting, remember to stop the thread if the input from any of the nodes is nil.
 
 Note: the IgnoreCase option, for all the Nodes with this feature, gets saved for each individual Node. This is retrieved the next time the same Node is created.
 
