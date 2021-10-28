@@ -72,7 +72,7 @@ function node:SetSelectionComponents()
 			local success,err = pcall(function()
 				cmdData = require(cmdModule)
 			end)
-			if err then return end
+			if err then continue end
 			local clone = frame.Template:Clone()
 			clone.Name = cmdData.metadata.id
 			clone.Display.Text = cmdData.metadata.display
