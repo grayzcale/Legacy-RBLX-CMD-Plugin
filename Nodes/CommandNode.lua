@@ -68,7 +68,11 @@ function node:SetSelectionComponents()
 	self._selection = {}
 	local function createClones(source)
 		for _, cmdModule in ipairs(source:GetChildren()) do
-			local cmdData = require(cmdModule)
+			local cmdData 
+			local success,err = pcall(function()
+				cmdData = require(cmdModule)
+			end)
+			if err then return end
 			local clone = frame.Template:Clone()
 			clone.Name = cmdData.metadata.id
 			clone.Display.Text = cmdData.metadata.display

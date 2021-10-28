@@ -5,8 +5,18 @@ chain.__index = chain
 
 local function addCommands(self, source)
 	for _, commandModule in ipairs(source:GetChildren()) do
-		local commandData = require(commandModule)
-		self._commands[commandData.metadata.id] = commandData
+		local commandData 
+		local success,err = pcall(function()
+			commandData = require(commandModule)
+		end)
+		if success then
+			self._commands[commandData.metadata.id] = commandData
+		else
+			warn("[CMD+]: Custom command \""..commandModule.Name.."\" errored")
+			task.spawn(function()
+				error(err)
+			end)
+		end
 	end
 	return self
 end
