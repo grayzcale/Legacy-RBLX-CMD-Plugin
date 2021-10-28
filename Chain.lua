@@ -29,7 +29,7 @@ function chain:Node(type)
 		elseif not input and nodeType == "CommandNode" then
 			self:Dispose()
 		end
-		if not self._disposed and self._currentCmd and self._commands[self._currentCmd].metadata.debugMode then
+		if not self._disposed and self._currentCmd and self._commands[self._currentCmd].metadata.autoDispose then
 			self:Dispose()
 		end
 	end
