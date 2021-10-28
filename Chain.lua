@@ -23,13 +23,13 @@ function chain:Node(type)
 			if nodeType == "CommandNode" then
 				self._id = self._commands[input].metadata.id
 				self._count += 1
-				self._currentCmd = input
-				self._commands[input].execute(self)
+				local success, err = pcall(function() self._commands[input].execute(self) end)
+				self:Dispose()
+				if not success then
+					error(err)
+				end
 			end
 		elseif not input and nodeType == "CommandNode" then
-			self:Dispose()
-		end
-		if not self._disposed and self._currentCmd and self._commands[self._currentCmd].metadata.autoDispose then
 			self:Dispose()
 		end
 	end
@@ -38,7 +38,13 @@ function chain:Node(type)
 end
 
 function chain:Dispose()
-	self._disposed = true
+	if self._disposed then return end
+	self._disposed = true	
+	
+	if self._node then
+		self._node:Destroy()
+	end
+	
 	self._provocations.Destroyed:Invoke()
 	for _, provocation in ipairs(self._provocations) do
 		provocation:Destroy()
