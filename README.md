@@ -9,7 +9,7 @@
 Use this extremely versatile plugin to improve your workflow on Roblox Studio by quickly executing custom shortcuts.
 
 #### How to plugin works:
-When you press the shortcut key, a new object Chain is created. This object is responsible for handling all the Nodes in a refined matter. It kind of resembles the idea of a chain with perfect links between, hence the name *Chain*. The CommandNode always comes first in the Chain. The next Nodes are created as they are defined in your command script. All of the Nodes get inherited from a superclass called Node. This is to allow easy access to add extra nodes in the future and maintain good code structure.
+When you press the shortcut key, a new object Chain is created. This object is responsible for handling all the Nodes in a refined matter. It kind of resembles the idea of a chain with perfect links between, hence the name *Chain*. The CommandNode always comes first in the Chain. The next Nodes are created as they are defined in your command script. All of the Nodes get inherited from a superclass called Node. This is to allow easy access to add extra nodes in the future and maintain good a code structure.
 
 <br>
 
@@ -34,9 +34,9 @@ return {
 	
 	--main function
 	execute = function(chain)
-		
 
-		chain:Dispose() --do not forget to close the chain
+		--create your nodes here
+
 	end;
 	
 }
@@ -66,9 +66,9 @@ Before starting, please note that you must remember to close the Chain by using 
 
 <table> SelectionNode:Get()
 --returns a table of selected objects by user
---WILL RETURN EMPTY TABLES IF NO OBJECTS ARE SELECTED, MAKE SURE TO HANDLE
+--returns an empty table if no objects were selected
 --yields until input is given
---nil if no input received, CLOSE CHAIN
+--nil if no input received
 ```
 
 <br>
@@ -88,7 +88,7 @@ Before starting, please note that you must remember to close the Chain by using 
 <string, boolean> InputNode:Get()
 --returns a string inputted by the user and a boolean if IgnoreCase was selected
 --yields until input is given
---nil if no input received, CLOSE CHAIN
+--nil if no input received
 ```
 
 <br>
@@ -108,7 +108,7 @@ Before starting, please note that you must remember to close the Chain by using 
 <string> ChoiceNode:Get()
 --returns a string key indicating which choice was selected
 --yields until input is given
---nil if no input received, CLOSE CHAIN
+--nil if no input received
 ```
 
 <br>
@@ -129,5 +129,5 @@ Before starting, please note that you must remember to close the Chain by using 
 <string> ListNode:Get()
 --returns a string key indicating which option from the list was selected
 --yields until input is given
---nil if no input received, CLOSE CHAIN
+--nil if no input received
 ```
