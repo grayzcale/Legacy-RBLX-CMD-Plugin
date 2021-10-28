@@ -46,7 +46,7 @@ return {
 
 #### Available Nodes:
 
-![image|446x500](upload://oR4z3iH4QAd2PVw9WoEW1FMPBSK.png)
+![image|446x500](https://doy2mn9upadnk.cloudfront.net/uploads/default/original/4X/a/e/3/ae340915ae2a3fe0914c160746a4f62637dbad5e.png)
 
 <br>
 
