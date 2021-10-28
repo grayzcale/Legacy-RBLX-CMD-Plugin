@@ -12,7 +12,29 @@ local function addCommands(self, source)
 			task.spawn(function()
 				error(err)
 			end)
-			continue 
+			continue
+		end
+		if type(commandData) == "table" then
+			if type(commandData.metadata) == "table" then
+				if type(commandData.metadata.id) ~= "string" then
+					warn("[CMD+]: "..commandModule.Name..".metadata.id must be a string, got "..type(commandData.metadata.id))
+					continue
+				end
+				if type(commandData.metadata.display) ~= "string" then
+					warn("[CMD+]: "..commandModule.Name..".metadata.display must be a string, got "..type(commandData.metadata.display))
+					continue
+				end
+				if type(commandData.metadata.inputRequired) ~= "boolean" then
+					warn("[CMD+]: "..commandModule.Name..".metadata.inputRequired must be a boolean, got "..type(commandData.metadata.inputRequired))
+					continue
+				end
+			else
+				warn("[CMD+]: "..commandModule.Name..".metadata must be a table, got "..type(commandData.metadata))
+				continue
+			end
+		else
+			warn("[CMD+]: "..commandModule.Name.." must return a table, got "..type(commandData))
+			continue
 		end
 		self._commands[commandData.metadata.id] = commandData
 	end
