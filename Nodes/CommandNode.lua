@@ -74,20 +74,13 @@ function node:SetSelectionComponents()
 			
 			if type(cmdData) == "table" then
 				if type(cmdData.metadata) == "table" then
-					if type(cmdData.metadata.id) ~= "string" then
-						continue
-					end
-					if type(cmdData.metadata.display) ~= "string" then
-						continue
-					end
-					if type(cmdData.metadata.inputRequired) ~= "boolean" then
-						continue
-					end
+					if type(cmdData.metadata.id) ~= "string" then continue end
+					if type(cmdData.metadata.display) ~= "string" then continue end
+					if type(cmdData.metadata.inputRequired) ~= "boolean" then continue end
 				else
 					continue
 				end
 			else
-				warn("[CMD+]: "..cmdModule.Name.." must return a table, got "..type(cmdData))
 				continue
 			end
 
