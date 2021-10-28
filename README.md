@@ -52,6 +52,8 @@ return {
 
 Before starting, please note that you must remember to close the Chain by using `chain:Dispose()` at the end of your custom command. Depending on your shortcut you should also close the Chain if the input of any nodes is nil.
 
+Note: the IgnoreCase option, for all the Nodes with this feature, gets saved for each individual Node. This is retrieved the next time the same Node is created.
+
 <br>
 
 #### SelectionNode:
