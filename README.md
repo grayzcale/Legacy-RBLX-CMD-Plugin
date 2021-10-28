@@ -9,7 +9,7 @@
 Use this extremely versatile plugin to improve your workflow on Roblox Studio by quickly executing custom shortcuts.
 
 #### How to plugin works:
-When you press the shortcut key, a new object Chain is created. This object is responsible for handling all the Nodes in a refined matter. It kind of resembles the idea of a chain with perfect links between, hence the name *Chain*. The CommandNode always comes first in the Chain. The next Nodes are created as they are defined in your command script. All of the Nodes get inherited from a superclass called Node. This is to allow easy access to add extra nodes in the future and maintain good a code structure.
+When you press the shortcut key, a new object Chain is created. This object is responsible for handling all the Nodes in a refined matter. It kind of resembles the idea of a chain with perfect links between, hence the name *Chain*. The CommandNode always comes first in the Chain. The next Nodes are created as they are defined in your command script. All of the Nodes get inherited from a superclass called Node. This is to allow easy access to add extra nodes in the future and maintain good code structure.
 
 <br>
 
@@ -34,9 +34,9 @@ return {
 	
 	--main function
 	execute = function(chain)
+		
 
-		--create your nodes here
-
+		chain:Dispose() --do not forget to close the chain
 	end;
 	
 }
@@ -49,9 +49,8 @@ return {
 ![image](https://user-images.githubusercontent.com/58129405/139063916-e4244dd7-ed35-4cd4-902a-1db74e778496.png)
 
 ### API:
-Before starting, remember to stop the thread if the input from any of the nodes is nil.
 
-Note: the IgnoreCase option, for all the Nodes with this feature, gets saved for each individual Node. This is retrieved the next time the same Node is created.
+Before starting, please note that you must remember to close the Chain by using `chain:Dispose()` at the end of your custom command. Depending on your shortcut you should also close the Chain if the input of any nodes is nil.
 
 <br>
 
@@ -67,9 +66,9 @@ Note: the IgnoreCase option, for all the Nodes with this feature, gets saved for
 
 <table> SelectionNode:Get()
 --returns a table of selected objects by user
---returns an empty table if no objects were selected
+--WILL RETURN EMPTY TABLES IF NO OBJECTS ARE SELECTED, MAKE SURE TO HANDLE
 --yields until input is given
---nil if no input received
+--nil if no input received, CLOSE CHAIN
 ```
 
 <br>
@@ -89,7 +88,7 @@ Note: the IgnoreCase option, for all the Nodes with this feature, gets saved for
 <string, boolean> InputNode:Get()
 --returns a string inputted by the user and a boolean if IgnoreCase was selected
 --yields until input is given
---nil if no input received
+--nil if no input received, CLOSE CHAIN
 ```
 
 <br>
@@ -109,7 +108,7 @@ Note: the IgnoreCase option, for all the Nodes with this feature, gets saved for
 <string> ChoiceNode:Get()
 --returns a string key indicating which choice was selected
 --yields until input is given
---nil if no input received
+--nil if no input received, CLOSE CHAIN
 ```
 
 <br>
@@ -130,5 +129,5 @@ Note: the IgnoreCase option, for all the Nodes with this feature, gets saved for
 <string> ListNode:Get()
 --returns a string key indicating which option from the list was selected
 --yields until input is given
---nil if no input received
+--nil if no input received, CLOSE CHAIN
 ```

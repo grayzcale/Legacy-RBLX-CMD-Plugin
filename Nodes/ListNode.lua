@@ -56,13 +56,13 @@ end
 
 function node:UpdateSelection()
 	if self._currentSelection then
-		self._currentSelection.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+		self._currentSelection.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		self._currentSelection = nil
 	end
 	if #self._frame.List:GetChildren() > 1 then
 		self._selectionIndex = math.clamp(self._selectionIndex, 1, #self._frame.List:GetChildren() - 1)
 		self._currentSelection = self._frame.List:GetChildren()[self._selectionIndex + 1]
-		self._currentSelection.BackgroundColor3 = Color3.fromRGB(37, 37, 37)
+		self._currentSelection.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
 		
 		if self._currentSelection.AbsolutePosition.Y + self._currentSelection.AbsoluteSize.Y > self._frame.List.AbsolutePosition.Y + self._frame.List.AbsoluteSize.Y then
 			tweenService:Create(self._frame.List, TweenInfo.new(.3), {CanvasPosition = Vector2.new(0, (23 * self._selectionIndex) - 150)}):Play()

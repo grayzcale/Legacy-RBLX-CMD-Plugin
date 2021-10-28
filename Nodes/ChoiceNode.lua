@@ -36,12 +36,12 @@ end
 
 function node:UpdateSelection()
 	if self._currentSelection then
-		self._currentSelection.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+		self._currentSelection.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		self._currentSelection = nil
 	end
 	self._selectionIndex = math.clamp(self._selectionIndex, 1, 2)
 	self._currentSelection = self._frame["Option"..tostring(self._selectionIndex)]
-	self._currentSelection.BackgroundColor3 = Color3.fromRGB(37, 37, 37)
+	self._currentSelection.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
 end
 
 function node:SetSelectionComponents()

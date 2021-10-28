@@ -34,9 +34,9 @@ end
 
 function node:UpdateSelection()
 	if not self._selectionIndex then
-		self._currentSelection.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+		self._currentSelection.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	else
-		self._currentSelection.BackgroundColor3 = Color3.fromRGB(37, 37, 37)
+		self._currentSelection.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
 	end
 end
 

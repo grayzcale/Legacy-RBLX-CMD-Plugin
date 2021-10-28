@@ -58,16 +58,18 @@ return {
 		local parent = workspace
 		if #selection > 0 then
 			parent = chain:Node("ChoiceNode"):Set({
-				text = "Parent to selected ("..(selection[1].Name)..")?";
+				title = "Object parent";
+				text = "Select object parent";
 				choices = {
-					{"Y", "Yes"};
-					{"N", "No (parent to workspace)"};
+					{"Y", selection[1].Name.." (selected)"};
+					{"N", "workspace"};
 				}
 			}):Get()
 			if not parent then return end
 		else
 			local confirmation = chain:Node("ChoiceNode"):Set({
-				text = "Set object parent to workspace?";
+				title = "Object parent";
+				text = "Parent object to workspace";
 				choices = {
 					{"Y", "Yes"};
 					{"N", "No"};
