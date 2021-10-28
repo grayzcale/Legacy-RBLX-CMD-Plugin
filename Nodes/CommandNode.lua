@@ -68,7 +68,33 @@ function node:SetSelectionComponents()
 	self._selection = {}
 	local function createClones(source)
 		for _, cmdModule in ipairs(source:GetChildren()) do
-			local cmdData = require(cmdModule)
+			local cmdData
+			local success,err = pcall(function()cmdData = require(cmdModule) end)
+			if err then continue end
+			
+			if type(cmdData) == "table" then
+				if type(cmdData.metadata) == "table" then
+					if type(cmdData.metadata.id) ~= "string" then
+						warn("[CMD+]: "..cmdModule.Name..".metadata.id must be a string, got "..type(cmdData.metadata.id))
+						continue
+					end
+					if type(cmdData.metadata.display) ~= "string" then
+						warn("[CMD+]: "..cmdModule.Name..".metadata.display must be a string, got "..type(cmdData.metadata.display))
+						continue
+					end
+					if type(cmdData.metadata.inputRequired) ~= "boolean" then
+						warn("[CMD+]: "..cmdModule.Name..".metadata.inputRequired must be a boolean, got "..type(cmdData.metadata.inputRequired))
+						continue
+					end
+				else
+					warn("[CMD+]: "..cmdModule.Name..".metadata must be a table, got "..type(cmdData.metadata))
+					continue
+				end
+			else
+				warn("[CMD+]: "..cmdModule.Name.." must return a table, got "..type(cmdData))
+				continue
+			end
+
 			local clone = frame.Template:Clone()
 			clone.Name = cmdData.metadata.id
 			clone.Display.Text = cmdData.metadata.display
