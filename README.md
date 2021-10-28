@@ -46,7 +46,9 @@ return {
 
 #### Available Nodes:
 
-![image](https://user-images.githubusercontent.com/58129405/139063916-e4244dd7-ed35-4cd4-902a-1db74e778496.png)
+![image|446x500](upload://oR4z3iH4QAd2PVw9WoEW1FMPBSK.png)
+
+<br>
 
 ### API:
 
