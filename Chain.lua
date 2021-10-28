@@ -23,9 +23,13 @@ function chain:Node(type)
 			if nodeType == "CommandNode" then
 				self._id = self._commands[input].metadata.id
 				self._count += 1
+				self._currentCmd = input
 				self._commands[input].execute(self)
 			end
 		elseif not input and nodeType == "CommandNode" then
+			self:Dispose()
+		end
+		if not self._disposed and self._currentCmd and self._commands[self._currentCmd].metadata.debugMode then
 			self:Dispose()
 		end
 	end
@@ -34,6 +38,7 @@ function chain:Node(type)
 end
 
 function chain:Dispose()
+	self._disposed = true
 	self._provocations.Destroyed:Invoke()
 	for _, provocation in ipairs(self._provocations) do
 		provocation:Destroy()

@@ -29,6 +29,11 @@ local primaryButton = pluginToolbar:CreateButton("CMD+", " ", "rbxassetid://7737
 local pluginAction = plugin:CreatePluginAction("CMD+", "CMD+", "Open CMD+", "rbxassetid://7737708078", true)
 
 local function createChain()
+	if activeChain and plugin:IsActivated() then
+		activeChain:Dispose()
+		return
+	end 
+	
 	if activeChain then return end
 	activeChain = true
 	

@@ -105,7 +105,7 @@ function node.new(type, plugin, pluginDisplay, id)
 		};
 	}, node)
 	
-	self._input = self._frame:FindFirstChildWhichIsA("TextBox", true)
+	self._input = self._frame:FindFirstChildWhichIsA("TextBox", true)	
 	self._ignoreCase = self._frame:FindFirstChild("IgnoreCase") and self._frame:FindFirstChild("IgnoreCase").Dot
 	if self._ignoreCase then
 		self._ignoreCase.Visible = plugin:GetSetting(id)
@@ -126,9 +126,9 @@ function node:Forge(events)
 			end
 		end);
 
-		self._pluginDisplay.Imposter.MouseLeave:Connect(function()
-			self:Destroy()
-		end);
+		--self._pluginDisplay.Imposter.MouseLeave:Connect(function()
+		--	self:Destroy()
+		--end);
 		
 		(self._ignoreCase and self._frame.IgnoreCase.InputBegan:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -150,25 +150,27 @@ function node:Forge(events)
 			end
 		end));
 
-		self._pluginDisplay.Imposter.MouseMoved:Connect(function()
-			if self._destroyed then return end
-			local nodePosX, nodePosY = self._frame.AbsolutePosition.X, self._frame.AbsolutePosition.Y
-			local nodeSizeX, nodeSizeY = self._frame.AbsoluteSize.X, self._frame.AbsoluteSize.Y
-			local mouseLocation = userInputService:GetMouseLocation()
-			local mouseX, mouseY = mouseLocation.X, mouseLocation.Y
-			local magnitude = (Vector2.new(nodePosX + (nodeSizeX / 2), nodePosY + (nodeSizeY / 2)) - Vector2.new(mouseX, mouseY)).Magnitude
-			if magnitude > (math.sqrt(nodeSizeX^2 + nodeSizeY^2) / 2) + 75 then
-				self:Destroy()
-			end
-		end);
+		--self._pluginDisplay.Imposter.MouseMoved:Connect(function()
+		--	if self._destroyed then return end
+		--	local nodePosX, nodePosY = self._frame.AbsolutePosition.X, self._frame.AbsolutePosition.Y
+		--	local nodeSizeX, nodeSizeY = self._frame.AbsoluteSize.X, self._frame.AbsoluteSize.Y
+		--	local mouseLocation = userInputService:GetMouseLocation()
+		--	local mouseX, mouseY = mouseLocation.X, mouseLocation.Y
+		--	local magnitude = (Vector2.new(nodePosX + (nodeSizeX / 2), nodePosY + (nodeSizeY / 2)) - Vector2.new(mouseX, mouseY)).Magnitude
+		--	if magnitude > (math.sqrt(nodeSizeX^2 + nodeSizeY^2) / 2) + 75 then
+		--		self:Destroy()
+		--	end
+		--end);
 
 		userInputService.InputBegan:Connect(function(input, GPE)
+			if self._destroyed then return end
+			
 			if self._selection and (input.KeyCode == Enum.KeyCode.Up or input.KeyCode == Enum.KeyCode.Down) then
 				if not self._selectionIndex then
 					self._selectionIndex = 1
 				else
 					self._selectionIndex += (input.KeyCode == Enum.KeyCode.Up and -1) or 1
-				end				
+				end
 				self:UpdateSelection()
 			end
 
@@ -178,13 +180,18 @@ function node:Forge(events)
 			elseif self._imposter and table.find({"Up", "Down"}, input.KeyCode.Name) then
 				self._inputCaptured = true
 				self._imposter:CaptureFocus()
-			elseif not self._inputCaptured then
+			elseif not self._inputCaptured and input.UserInputType ~= Enum.UserInputType.MouseMovement then
 				self:Destroy(nil, true)
 			end
 		end);
 	}
 	
 	for _, event in ipairs(events) do table.insert(self._connections, event) end
+	
+	if self._input then
+		self._input:CaptureFocus()
+		self._inputCaptured = true
+	end
 end
 
 function node:CreateImposter()
