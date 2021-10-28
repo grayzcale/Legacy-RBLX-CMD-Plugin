@@ -8,7 +8,7 @@
 
 Use this extremely versatile plugin to improve your workflow on Roblox Studio by quickly executing custom shortcuts.
 
-#### How to plugin works:
+#### How the plugin works:
 When you press the shortcut key, a new object Chain is created. This object is responsible for handling all the Nodes in a refined matter. It kind of resembles the idea of a chain with perfect links between, hence the name *Chain*. The CommandNode always comes first in the Chain. The next Nodes are created as they are defined in your command script. All of the Nodes get inherited from a superclass called Node. This is to allow easy access to add extra nodes in the future and maintain good code structure.
 
 <br>
@@ -41,8 +41,10 @@ return {
 	
 }
 ```
-
+**Note:** After editing a custom command you **must** press "Reload Script" in order for CMD+ to know there is a change.
 <br>
+
+![image|258x123](https://cdn.discordapp.com/attachments/846499029742256138/903413082863337482/download.png)
 
 #### Available Nodes:
 
