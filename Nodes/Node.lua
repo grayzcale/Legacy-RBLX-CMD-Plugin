@@ -117,7 +117,11 @@ end
 function node:Forge(events)
 	self._connections = {		
 		(self._input and self._input.FocusLost:Connect(function(enterPressed)
-			self:Destroy(enterPressed, not enterPressed)
+			if enterPressed then
+				self:Destroy(enterPressed, false)
+			else
+				self._inputCaptured = false
+			end
 		end));
 
 		self._pluginDisplay.Imposter.InputBegan:Connect(function(input)
@@ -125,10 +129,17 @@ function node:Forge(events)
 				self._inputCaptured = false
 			end
 		end);
+		
+		self._frame.MouseEnter:Connect(function()
+			if self._input then
+				self._input:ReleaseFocus()
+				self._capturedInput = false
+			end
+		end);
 
-		--self._pluginDisplay.Imposter.MouseLeave:Connect(function()
-		--	self:Destroy()
-		--end);
+		self._pluginDisplay.Imposter.MouseLeave:Connect(function()
+			self:Destroy()
+		end);
 		
 		(self._ignoreCase and self._frame.IgnoreCase.InputBegan:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -180,7 +191,7 @@ function node:Forge(events)
 			elseif self._imposter and table.find({"Up", "Down"}, input.KeyCode.Name) then
 				self._inputCaptured = true
 				self._imposter:CaptureFocus()
-			elseif not self._inputCaptured and input.UserInputType ~= Enum.UserInputType.MouseMovement then
+			elseif not self._inputCaptured and input.UserInputType ~= Enum.UserInputType.MouseMovement and input.UserInputType ~= Enum.UserInputType.Focus then
 				self:Destroy(nil, true)
 			end
 		end);

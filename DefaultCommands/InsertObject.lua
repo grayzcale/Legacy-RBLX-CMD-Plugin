@@ -15,7 +15,7 @@ return {
 			title = "Select class";
 			placeholder = "search class...";
 			list = {
-				{"Other", true, Color3.fromRGB(255, 42, 14)};
+				{"Other", true, Color3.fromRGB(159, 89, 9)};
 				{"Part", true};
 				{"Accessory", true};
 				{"Animation", true};
@@ -29,7 +29,7 @@ return {
 				{"SurfaceGui", true};
 			};
 		}):Get();
-		if not objectClass then chain:Dispose() return end
+		if not objectClass then return end
 		
 		if objectClass == "Other" then
 			objectClass = chain:Node("InputNode"):Set({
@@ -37,7 +37,7 @@ return {
 				placeholder = "enter class name...";
 				ignoreCase = false;
 			}):Get();
-			if not objectClass then chain:Dispose() return end
+			if not objectClass then return end
 		end
 		
 		local objectName = chain:Node("InputNode"):Set({
@@ -45,14 +45,14 @@ return {
 			placeholder = "enter object(s) name...";
 			ignoreCase = false;
 		}):Get()
-		if not objectName then chain:Dispose() return end
+		if not objectName then return end
 		
 		local objectAmount = chain:Node("InputNode"):Set({
 			title = "Amount of object(s)";
 			placeholder = "enter # of objects to create...";
 			ignoreCase = false;
 		}):Get();
-		if not objectAmount then chain:Dispose() return end
+		if not objectAmount then return end
 		
 		local selection = selectionService:Get()
 		local parent = workspace
@@ -64,7 +64,7 @@ return {
 					{"N", "No (parent to workspace)"};
 				}
 			}):Get()
-			if not parent then chain:Dispose() return end
+			if not parent then return end
 		else
 			local confirmation = chain:Node("ChoiceNode"):Set({
 				text = "Set object parent to workspace?";
@@ -73,7 +73,7 @@ return {
 					{"N", "No"};
 				}
 			}):Get()
-			if not confirmation or confirmation == "N" then chain:Dispose() return end
+			if not confirmation or confirmation == "N" then return end
 		end
 		
 		if parent == "Y" then
@@ -95,12 +95,10 @@ return {
 		changeHistoryService:SetWaypoint("Created Object")
 		
 		if not success then
-			chain:Dispose()
 			error(err)
 		end
 		
 		selectionService:Set(created)
-		chain:Dispose()
 	end;
 	
 }

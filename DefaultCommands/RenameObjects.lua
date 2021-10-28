@@ -14,7 +14,7 @@ return {
 		local selection, _ = chain:Node("SelectionNode"):Set({
 			title = "Select object(s)";
 		}):Get()
-		if not selection or #selection < 1 then chain:Dispose() return end
+		if not selection or #selection < 1 then return end
 
 
 		--Create a new InputNode with optional settings and make sure input was recieved
@@ -37,10 +37,6 @@ return {
 			--Set waypoint after action to allow undo
 			changeHistoryService:SetWaypoint("Renamed Objects")
 		end
-
-		--Close Chain after use
-		chain:Dispose()
-
 	end;
 
 }
