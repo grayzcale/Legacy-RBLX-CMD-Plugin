@@ -29,14 +29,15 @@ return {
 	metadata = {
 		id = "";   --unique id for every command; must be different for each cmd
 		display = "";   --display-text for command
+		shortcut = {}; --optional table of KeyCode Enums
 		inputRequired = false;   --enable if command requires input
 	};
 	
 	--main function
 	execute = function(chain)
-	
-		--create Nodes here
-	
+
+		--create your nodes here
+
 	end;
 	
 }
@@ -52,7 +53,9 @@ return {
 
 ### API:
 
-Before starting, please note that you must remember to close the Chain by using `chain:Dispose()` at the end of your custom command. Depending on your shortcut you should also close the Chain if the input of any nodes is nil.
+Before starting, remember to stop the thread if the input from any of the nodes is nil.
+
+Note: the IgnoreCase option, for all the Nodes with this feature, gets saved for each individual Node. This is retrieved the next time the same Node is created.
 
 <br>
 
@@ -68,9 +71,9 @@ Before starting, please note that you must remember to close the Chain by using 
 
 <table> SelectionNode:Get()
 --returns a table of selected objects by user
---WILL RETURN EMPTY TABLES IF NO OBJECTS ARE SELECTED, MAKE SURE TO HANDLE
+--returns an empty table if no objects were selected
 --yields until input is given
---nil if no input received, CLOSE CHAIN
+--nil if no input received
 ```
 
 <br>
@@ -81,7 +84,8 @@ Before starting, please note that you must remember to close the Chain by using 
 
 <ListNode> ListNode:Set({
 	title = ""; --title of Node, default: ""
-	placeholder = ""; --placeholder text of Node, default: ""
+	placeholder = ""; --placeholder text of Node, default: "";
+	default = ""; --optional value for node, default: "";
 	list = {
 		{"", false, Color3.fromRGB()} --format: {option name, true to show icon, icon color}
 	};
@@ -90,7 +94,7 @@ Before starting, please note that you must remember to close the Chain by using 
 <string, boolean> InputNode:Get()
 --returns a string inputted by the user and a boolean if IgnoreCase was selected
 --yields until input is given
---nil if no input received, CLOSE CHAIN
+--nil if no input received
 ```
 
 <br>
@@ -102,7 +106,7 @@ Before starting, please note that you must remember to close the Chain by using 
 <ChoiceNode> ChoiceNode:Set({
 	title = ""; --title of Node, default: ""
 	text = ""; --text display message, default: ""
-		options = {
+		choices = {
 			{"", ""} --format: {key, text}
 	};
 })
@@ -110,7 +114,7 @@ Before starting, please note that you must remember to close the Chain by using 
 <string> ChoiceNode:Get()
 --returns a string key indicating which choice was selected
 --yields until input is given
---nil if no input received, CLOSE CHAIN
+--nil if no input received
 ```
 
 <br>
@@ -122,14 +126,14 @@ Before starting, please note that you must remember to close the Chain by using 
 <ListNode> ListNode:Set({
 	title = ""; --title of Node, default: ""
 
-	text = ""; --text display message, default: ""
-		options = {
-			{"", ""} --format: {"key", "message"}
+	placeholder = ""; --placeholder text of Node, default: ""
+	list = {
+			{"", true, Color3.fromRGB()} --format: {"key", "icon", "icon color"}
 	};
 })
 
 <string> ListNode:Get()
 --returns a string key indicating which option from the list was selected
 --yields until input is given
---nil if no input received, CLOSE CHAIN
+--nil if no input received
 ```
