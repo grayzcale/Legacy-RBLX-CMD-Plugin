@@ -45,7 +45,7 @@ return {
 
 <br>
 
-#### Script for the default "Rename" command:
+#### Example script for the default rename command:
 ```lua
 local changeHistoryService = game:GetService("ChangeHistoryService")
 local selectionService = game:GetService("Selection")
