@@ -54,7 +54,7 @@ function chain:Dispose()
 	end
 end
 
-function chain.new(plugin, display)
+function chain.new(plugin, display, cmd)
 	local self = setmetatable({
 		_plugin = plugin;
 		_display = display;
@@ -69,6 +69,18 @@ function chain.new(plugin, display)
 	if serverStorage:FindFirstChild("CMD+") then
 		self = addCommands(self, serverStorage["CMD+"])
 	end
+	
+	task.spawn(function()
+		if cmd then
+			self._id  = cmd
+			self._count += 1
+			local success, err = pcall(function() self._commands[cmd].execute(self) end)
+			self:Dispose()
+			if not success then
+				error(err)
+			end
+		end
+	end)
 	
 	self:Node("CommandNode")
 	self._restricted = true

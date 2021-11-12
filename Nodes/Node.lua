@@ -123,6 +123,12 @@ function node:Forge(events)
 				self._inputCaptured = false
 			end
 		end));
+		
+		(self._input and self._input:GetPropertyChangedSignal("Text"):Connect(function()
+			if os.clock() - self._birth < 0.1 then
+				self._input.Text = ""
+			end
+		end));
 
 		self._pluginDisplay.Imposter.InputBegan:Connect(function(input)
 			if input.UserInputType ~= Enum.UserInputType.MouseMovement then

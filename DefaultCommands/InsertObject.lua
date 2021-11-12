@@ -6,6 +6,7 @@ return {
 	metadata = {
 		id = "DefaultCMD:InsertObject";
 		display = "Insert object(s)";
+		shortcut = {Enum.KeyCode.LeftShift, Enum.KeyCode.A};
 		inputRequired = true;
 	};
 	
@@ -44,6 +45,7 @@ return {
 			title = "Set object(s) name";
 			placeholder = "enter object(s) name...";
 			ignoreCase = false;
+			default = objectClass;
 		}):Get()
 		if not objectName then return end
 		
@@ -51,6 +53,7 @@ return {
 			title = "Amount of object(s)";
 			placeholder = "enter # of objects to create...";
 			ignoreCase = false;
+			default = "1";
 		}):Get();
 		if not objectAmount then return end
 		
@@ -61,7 +64,7 @@ return {
 				title = "Object parent";
 				text = "Select object parent";
 				choices = {
-					{"Y", selection[1].Name.." (selected)"};
+					{"Y", "To selected"};
 					{"N", "workspace"};
 				}
 			}):Get()

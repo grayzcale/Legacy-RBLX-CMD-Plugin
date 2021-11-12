@@ -18,6 +18,12 @@ function node.new(plugin, pluginDisplay, id)
 				self._ignoreCase = nil
 			end
 		end;
+		default = function(txt)
+			task.delay(0.1, function()
+				self._input.Text = txt
+				self._input.CursorPosition = string.len(txt) + 1
+			end)				
+		end;
 	}
 	self:Transition(1, true, nil, true)
 	self._frame.Parent = pluginDisplay

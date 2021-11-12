@@ -17,6 +17,7 @@ function node.new(plugin, pluginDisplay, id)
 	self._frame.Parent = pluginDisplay
 	self:Forge({
 		self._input:GetPropertyChangedSignal("Text"):Connect(function()
+			if os.clock() - self._birth < 0.1 then return end
 			for _, selection in ipairs(self._selection) do
 				selection.Parent = nil
 			end
