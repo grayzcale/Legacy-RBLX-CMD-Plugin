@@ -6,7 +6,7 @@ return {
 	metadata = {
 		id = "DefaultCMD:InsertObject";
 		display = "Insert object(s)";
-		shortcut = {Enum.KeyCode.LeftShift, Enum.KeyCode.A};
+		shortcut = {Enum.KeyCode.LeftShift, Enum.KeyCode.C};
 		inputRequired = true;
 	};
 	
